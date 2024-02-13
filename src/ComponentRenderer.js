@@ -64,11 +64,6 @@ import TabGridCards from "components/cards/TabCardGrid.js";
 import ProfileThreeColGridCards from "components/cards/ProfileThreeColGrid.js"
 import ThreeColContactDetailsCards from "components/cards/ThreeColContactDetails.js"
 
-import ThreeColSimpleWithImageBlog from "components/blogs/ThreeColSimpleWithImage.js";
-import ThreeColSimpleWithImageAndDashedBorderBlog from "components/blogs/ThreeColSimpleWithImageAndDashedBorder.js";
-import PopularAndRecentPostsBlog from "components/blogs/PopularAndRecentBlogPosts.js";
-import GridWithFeaturedPostBlog from "components/blogs/GridWithFeaturedPost.js";
-
 import TwoColumnWithImageTestimonial from "components/testimonials/TwoColumnWithImage.js";
 import TwoColumnWithImageAndProfilePictureReviewTestimonial from "components/testimonials/TwoColumnWithImageAndProfilePictureReview.js";
 import TwoColumnWithImageAndRatingTestimonial from "components/testimonials/TwoColumnWithImageAndRating.js";
@@ -315,32 +310,6 @@ export const components = {
           url: "/components/blocks/Cards/Trending",
         },
       }
-    },
-
-    Blog: {
-      type: "Blog Section",
-      elements: {
-        GridWithFeaturedPost: {
-          name: "Grid With Featured Post",
-          component: GridWithFeaturedPostBlog,
-          url: "/components/blocks/Blog/GridWithFeaturedPost",
-        },
-        PopularAndRecentPosts: {
-          name: "Popular And Recent Posts",
-          component: PopularAndRecentPostsBlog,
-          url: "/components/blocks/Blog/PopularAndRecentPosts",
-        },
-        ThreeColSimpleWithImage: {
-          name: "Simple Three Column With Image",
-          component: ThreeColSimpleWithImageBlog,
-          url: "/components/blocks/Blog/ThreeColSimpleWithImage",
-        },
-        ThreeColSimpleWithImageAndDashedBorder: {
-          name: "Simple Three Column With Image and Dashed Border",
-          component: ThreeColSimpleWithImageAndDashedBorderBlog,
-          url: "/components/blocks/Blog/ThreeColSimpleWithImageAndDashedBorder",
-        },
-      } 
     },
 
     Testimonial: {

@@ -5,7 +5,6 @@ import Features from "components/features/ThreeColSimple.js";
 import MainFeature from "components/features/TwoColSingleFeatureWithStats.js";
 import SliderCard from "components/cards/ThreeColSlider.js";
 import TrendingCard from "components/cards/TwoTrendingPreviewCardsWithImage.js";
-import Blog from "components/blogs/PopularAndRecentBlogPosts.js";
 import Testimonial from "components/testimonials/TwoColumnWithImageAndProfilePictureReview.js";
 import FAQ from "components/faqs/SimpleWithSideImage.js";
 import SubscribeNewsLetterForm from "components/forms/SimpleSubscribeNewsletter.js";
@@ -18,7 +17,6 @@ export default () => (
     <SliderCard />
     <TrendingCard />
     <MainFeature />
-    <Blog />
     <Testimonial textOnLeft={true}/>
     <FAQ />
     <SubscribeNewsLetterForm />
