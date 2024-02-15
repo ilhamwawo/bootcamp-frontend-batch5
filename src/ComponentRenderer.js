@@ -5,13 +5,8 @@ import AnimationRevealPage from "helpers/AnimationRevealPage.js"
 import HotelTravelLandingPage from "demos/HotelTravelLandingPage.js";
 import RestaurantLandingPage from "demos/RestaurantLandingPage.js";
 
-import EventLandingPageImageSrc from "images/demo/EventLandingPage.jpeg";
 import HotelTravelLandingPageImageSrc from "images/demo/HotelTravelLandingPage.jpeg";
-import AgencyLandingPageImageSrc from "images/demo/AgencyLandingPage.jpeg";
-import SaaSProductLandingPageImageSrc from "images/demo/SaaSProductLandingPage.jpeg";
 import RestaurantLandingPageImageSrc from "images/demo/RestaurantLandingPage.jpeg";
-import ServiceLandingPageImageSrc from "images/demo/ServiceLandingPage.jpeg";
-import HostingCloudLandingPageImageSrc from "images/demo/HostingCloudLandingPage.jpeg";
 
 
 import LoginPage from "pages/Login.js";
@@ -19,7 +14,6 @@ import SignupPage from "pages/Signup.js";
 import PricingPage from "pages/Pricing.js";
 import AboutUsPage from "pages/AboutUs.js";
 import ContactUsPage from "pages/ContactUs.js";
-import BlogIndexPage from "pages/BlogIndex.js";
 import TermsOfServicePage from "pages/TermsOfService.js";
 import PrivacyPolicyPage from "pages/PrivacyPolicy.js";
 
@@ -131,11 +125,6 @@ export const components = {
       component: ContactUsPage,
       url: `/components/innerPages/ContactUsPage`,
       imageSrc: ContactUsPageImageSrc,
-    },
-    BlogIndexPage: {
-      component: BlogIndexPage,
-      url: `/components/innerPages/BlogIndexPage`,
-      imageSrc: BlogIndexPageImageSrc,
     },
     TermsOfServicePage: {
       component: TermsOfServicePage,

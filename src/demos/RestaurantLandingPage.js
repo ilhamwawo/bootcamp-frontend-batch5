@@ -37,7 +37,7 @@ export default () => {
         heading={
           <>
             Melayani telah
-            <wbr /> <HighlightedText>over 5 years.</HighlightedText>
+            <wbr /> <HighlightedText>lebih dari 5 tahun.</HighlightedText>
           </>
         }
         description={
@@ -98,8 +98,8 @@ export default () => {
         imageCss={tw`w-20! h-20!`}
       />
       <MainFeature2
-        subheading={<Subheading>A Reputed Brand</Subheading>}
-        heading={<>Why <HighlightedText>Choose Us ?</HighlightedText></>}
+        subheading={<Subheading>Why</Subheading>}
+        heading={<>Kenapa <HighlightedText>Pilih Kami ?</HighlightedText></>}
         statistics={[
           {
             key: "Orders",
@@ -126,10 +126,10 @@ export default () => {
       />
       <Testimonial
         subheading=""
-        heading={<>Customers <HighlightedText>Love Us.</HighlightedText></>}
+        heading={<>Testimoni <HighlightedText>Pelanggan Kami.</HighlightedText></>}
       />
       <DownloadApp
-        text={<>People around you are ordering delicious meals using the <HighlightedTextInverse>Treact App.</HighlightedTextInverse></>}
+        text={<>Dapatkan Promo menarik dengan Download <HighlightedTextInverse>Cek Toko Sebelah App.</HighlightedTextInverse></>}
       />
       <Footer />
     </AnimationRevealPage>
