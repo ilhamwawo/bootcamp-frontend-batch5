@@ -8,6 +8,7 @@ import ThankYouPage from "ThankYouPage.js";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import RestaurantLandingPage from "demos/RestaurantLandingPage";
+import HotelTravelLandingPage from "demos/HotelTravelLandingPage";
 
 export default function App() {
   // If you want to disable the animation just use the disabled `prop` like below on your page's component
@@ -22,7 +23,7 @@ export default function App() {
           <Route path="/components/:type/:subtype/:name" element={<ComponentRenderer />} />
           <Route path="/components/:type/:name" element={<ComponentRenderer />} />
           <Route path="/thank-you" element={<ThankYouPage />} />
-          <Route path="/" element={<RestaurantLandingPage />} />
+          <Route path="/" element={<HotelTravelLandingPage />} />
         </Routes>
       </Router>
     </>
