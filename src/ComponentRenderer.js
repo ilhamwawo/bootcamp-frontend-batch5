@@ -2,10 +2,8 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import AnimationRevealPage from "helpers/AnimationRevealPage.js"
 
-import HotelTravelLandingPage from "demos/HotelTravelLandingPage.js";
 import RestaurantLandingPage from "demos/RestaurantLandingPage.js";
 
-import HotelTravelLandingPageImageSrc from "images/demo/HotelTravelLandingPage.jpeg";
 import RestaurantLandingPageImageSrc from "images/demo/RestaurantLandingPage.jpeg";
 
 
@@ -90,12 +88,7 @@ export const components = {
       component: RestaurantLandingPage,
       imageSrc: RestaurantLandingPageImageSrc,
       url: "/components/landingPages/RestaurantLandingPage",
-    },
-    HotelTravelLandingPage: {
-      component: HotelTravelLandingPage,
-      imageSrc: HotelTravelLandingPageImageSrc,
-      url: "/components/landingPages/HotelTravelLandingPage",
-    },
+    }
   },
 
   innerPages: {
