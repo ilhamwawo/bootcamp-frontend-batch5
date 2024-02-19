@@ -85,21 +85,23 @@ export default ({ heading = "Checkout the Menu" }) => {
   const [selectedItem, setSelectedItem] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [tabsKeys, setTabsKeys] = useState([
-    "Starters",
+    "Best Sellers",
     "Main",
     "Soup",
     "Desserts",
   ]);
-  const [activeTab, setActiveTab] = useState("Starters");
+  const [activeTab, setActiveTab] = useState("Best Sellers");
   const { addItem, updateItemQuantity, items } = useCart();
-  const {products} = useProductsContext()
+  const { products } = useProductsContext();
   const getRandomCards = () => {
     const cards = products;
     return cards.sort(() => Math.random() - 0.5);
   };
 
   const tabs = {
-    Starters: products,
+    "Best Sellers": products
+      .sort((a, b) => b.stars - a.stars) // Sort by stars in descending order
+      .slice(0, 8), // Get the top 8 items
     Main: getRandomCards(),
     Soup: getRandomCards(),
     Desserts: getRandomCards(),

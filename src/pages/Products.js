@@ -3,8 +3,8 @@ import AnimationRevealPage from "helpers/AnimationRevealPage.js";
 import tw from "twin.macro";
 import Header from "../components/headers/light";
 import Footer from "../components/footers/FiveColumnWithInputForm.js";
-import ProductList from "components/ProductList";
-import Sort from "components/Sort";
+import ProductList from "components/products/ProductList";
+import Sort from "components/sort/Sort";
 import Filters from "components/Filters";
 
 export const Products = () => {
