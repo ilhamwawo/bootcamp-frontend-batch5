@@ -40,20 +40,22 @@ p {
     display: grid;
     grid-template-columns: 1fr 1fr;
     column-gap: 0.5rem;
+    margin-left: 20px;
 }
 
 .btn-container .active {
-    background: var(--clr-black);
-    color: var(--clr-white);
+    background: rgb(100 21 255 / var(--tw-bg-opacity));;
+    color: white;
+    border-radius: 4px;
   }
 
 .btn-container button {
     background: transparent;
     border: 1px solid var(--clr-black);
     color: var(--clr-black);
-    width: 1.5rem;
+    width: 2rem;
     border-radius: var(--radius);
-    height: 1.5rem;
+    height: 2rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -61,7 +63,7 @@ p {
 }
 
 .btn-container button svg {
-    font-size: 1rem;
+    font-size: 1.5rem;
 }
 
 .sort-input {

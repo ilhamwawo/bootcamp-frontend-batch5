@@ -15,10 +15,10 @@ const Sort = () => {
 
   return (
     <div className="section-sort">
-      <div className="btn-container ">
+      <div className="btn-container">
         <button
           name="button"
-          className={`${grid_view === true ? "active" : ""}`}
+          className={`${grid_view ? "active" : ""}`}
           onClick={() => setGridView()}
           type="button"
         >
@@ -28,7 +28,7 @@ const Sort = () => {
         </button>
 
         <button
-          className={`${grid_view === false ? "active" : ""}`}
+          className={`${!grid_view ? "active" : ""}`}
           onClick={setListView}
           type="button"
         >
