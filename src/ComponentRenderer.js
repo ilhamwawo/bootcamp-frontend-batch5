@@ -1,11 +1,10 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
-import AnimationRevealPage from "helpers/AnimationRevealPage.js"
+import React from "react";
+import { useParams } from "react-router-dom";
+import AnimationRevealPage from "helpers/AnimationRevealPage.js";
 
-import RestaurantLandingPage from "demos/RestaurantLandingPage.js";
+import RestaurantLandingPage from "pages/RestaurantLandingPage.js";
 
 import RestaurantLandingPageImageSrc from "images/demo/RestaurantLandingPage.jpeg";
-
 
 import LoginPage from "pages/Login.js";
 import SignupPage from "pages/Signup.js";
@@ -53,8 +52,8 @@ import SliderCards from "components/cards/ThreeColSlider.js";
 import TrendingCards from "components/cards/TwoTrendingPreviewCardsWithImage.js";
 import PortfolioCards from "components/cards/PortfolioTwoCardsWithImage.js";
 import TabGridCards from "components/cards/TabCardGrid.js";
-import ProfileThreeColGridCards from "components/cards/ProfileThreeColGrid.js"
-import ThreeColContactDetailsCards from "components/cards/ThreeColContactDetails.js"
+import ProfileThreeColGridCards from "components/cards/ProfileThreeColGrid.js";
+import ThreeColContactDetailsCards from "components/cards/ThreeColContactDetails.js";
 
 import TwoColumnWithImageTestimonial from "components/testimonials/TwoColumnWithImage.js";
 import TwoColumnWithImageAndProfilePictureReviewTestimonial from "components/testimonials/TwoColumnWithImageAndProfilePictureReview.js";
@@ -81,14 +80,13 @@ import FiveColumnWithBackgroundFooter from "components/footers/FiveColumnWithBac
 import FiveColumnDarkFooter from "components/footers/FiveColumnDark.js";
 import MiniCenteredFooter from "components/footers/MiniCenteredFooter.js";
 
-
 export const components = {
   landingPages: {
     RestaurantLandingPage: {
       component: RestaurantLandingPage,
       imageSrc: RestaurantLandingPageImageSrc,
       url: "/components/landingPages/RestaurantLandingPage",
-    }
+    },
   },
 
   innerPages: {
@@ -128,7 +126,7 @@ export const components = {
       component: PrivacyPolicyPage,
       url: `/components/innerPages/PrivacyPolicyPage`,
       imageSrc: PrivacyPolicyPageImageSrc,
-    }
+    },
   },
 
   blocks: {
@@ -170,7 +168,7 @@ export const components = {
           component: IllustrationAndPrimaryBackgroundHero,
           url: "/components/blocks/Hero/IllustrationAndPrimaryBackground",
         },
-      }
+      },
     },
     Pricing: {
       type: "Pricing Section",
@@ -190,7 +188,7 @@ export const components = {
           component: ThreePlansPricing,
           url: "/components/blocks/Pricing/ThreePlans",
         },
-      }
+      },
     },
     Features: {
       type: "Features Section",
@@ -200,7 +198,7 @@ export const components = {
           component: ThreeColWithSideImageFeatures,
           url: "/components/blocks/Features/ThreeColWithSideImage",
         },
-         TwoColWithButton: {
+        TwoColWithButton: {
           name: "Two Column With Image and Action Button",
           component: TwoColWithButtonFeatures,
           url: "/components/blocks/Features/TwoColWithButton",
@@ -255,7 +253,7 @@ export const components = {
           component: VerticalWithAlternateImageAndTextFeatures,
           url: "/components/blocks/Features/VerticalWithAlternateImageAndText",
         },
-      }
+      },
     },
 
     Cards: {
@@ -291,7 +289,7 @@ export const components = {
           component: TrendingCards,
           url: "/components/blocks/Cards/Trending",
         },
-      }
+      },
     },
 
     Testimonial: {
@@ -322,7 +320,7 @@ export const components = {
           component: SimplePrimaryBackgroundTestimonial,
           url: "/components/blocks/Testimonial/SimplePrimaryBackground",
         },
-      }
+      },
     },
 
     FAQS: {
@@ -343,7 +341,7 @@ export const components = {
           component: TwoColumnPrimaryBackgroundFAQS,
           url: "/components/blocks/FAQS/TwoColumnPrimaryBackground",
         },
-      }
+      },
     },
 
     Form: {
@@ -369,7 +367,7 @@ export const components = {
           component: TwoColContactUsFullForm,
           url: "/components/blocks/Form/TwoColContactUsFull",
         },
-      }
+      },
     },
 
     CTA: {
@@ -390,7 +388,7 @@ export const components = {
           component: DownloadAppCTA,
           url: "/components/blocks/CTA/DownloadApp",
         },
-      }
+      },
     },
 
     Footer: {
@@ -421,32 +419,30 @@ export const components = {
           component: MiniCenteredFooter,
           url: "/components/blocks/Footer/MiniCentered",
         },
-      }
-    }
-  }
-}
+      },
+    },
+  },
+};
 
 export default () => {
-  const { type, subtype, name } = useParams()
+  const { type, subtype, name } = useParams();
 
   try {
     let Component = null;
-    if(type === "blocks" && subtype) {
-      Component= components[type][subtype]["elements"][name].component
-      return <AnimationRevealPage disabled>
-          <Component/>
+    if (type === "blocks" && subtype) {
+      Component = components[type][subtype]["elements"][name].component;
+      return (
+        <AnimationRevealPage disabled>
+          <Component />
         </AnimationRevealPage>
-    }
-    else
-      Component= components[type][name].component
+      );
+    } else Component = components[type][name].component;
 
-    if(Component)
-      return <Component/>
+    if (Component) return <Component />;
 
-    throw new Error("Component Not Found")
+    throw new Error("Component Not Found");
+  } catch (e) {
+    console.log(e);
+    return <div>Error: Component Not Found</div>;
   }
-  catch (e) {
-    console.log(e)
-    return <div>Error: Component Not Found</div>
-  }
-}
+};

@@ -3,7 +3,7 @@ import AnimationRevealPage from "helpers/AnimationRevealPage.js";
 import { Container, Content2Xl } from "components/misc/Layouts";
 import tw from "twin.macro";
 // eslint-disable-next-line
-import { css } from "styled-components/macro"; 
+import { css } from "styled-components/macro";
 import GitHubButton from "react-github-btn";
 
 import { LogoLink } from "components/headers/light.js";
@@ -19,10 +19,14 @@ const NavLink = tw.a`mt-4 lg:mt-0 transition duration-300 font-medium pb-1 borde
 const PrimaryNavLink = tw(
   NavLink
 )`text-gray-100 bg-primary-500 px-6 py-3 border-none rounded hocus:bg-primary-900 focus:shadow-outline`;
-const HeroRow = tw(Row)`max-w-xl flex-col justify-between items-center py-20 lg:py-24 mx-auto`;
+const HeroRow = tw(
+  Row
+)`max-w-xl flex-col justify-between items-center py-20 lg:py-24 mx-auto`;
 
 const Heading = tw(HeadingBase)`text-center text-primary-900 leading-snug`;
-const Description = tw(DescriptionBase)`mt-4 text-center lg:text-base text-gray-700 max-w-lg mx-auto lg:mx-0`;
+const Description = tw(
+  DescriptionBase
+)`mt-4 text-center lg:text-base text-gray-700 max-w-lg mx-auto lg:mx-0`;
 
 export default () => {
   /*
@@ -32,13 +36,13 @@ export default () => {
   window.gtag("js", new Date());
   window.gtag("config", "UA-45799926-9");
 
-  const downloadUrl = "/treact-ui.zip"
+  const downloadUrl = "/treact-ui.zip";
   React.useEffect(() => {
     var iframe = document.createElement("iframe");
     iframe.style.display = "none";
-    iframe.src = downloadUrl
+    iframe.src = downloadUrl;
     document.body.appendChild(iframe);
-  }, [])
+  }, []);
 
   return (
     <AnimationRevealPage disabled>
@@ -50,7 +54,10 @@ export default () => {
               Treact
             </LogoLink>
             <div tw="flex flex-col lg:flex-row items-center">
-              <NavLink target="_blank" href="https://owaiskhan.me/post/free-tailwindcss-react-ui-kit">
+              <NavLink
+                target="_blank"
+                href="https://owaiskhan.me/post/free-tailwindcss-react-ui-kit"
+              >
                 License & Usage
               </NavLink>
               <NavLink target="_blank" href="https://twitter.com/owaiswiz">
@@ -66,14 +73,22 @@ export default () => {
           </NavRow>
           <HeroRow>
             <Heading>Thank You!</Heading>
-            <Description tw="mt-12">Your Download Will Begin Shortly. If it does not, <NavLink href={downloadUrl} download>click this link</NavLink>.</Description>
+            <Description tw="mt-12">
+              Your Download Will Begin Shortly. If it does not,{" "}
+              <NavLink href={downloadUrl} download>
+                click this link
+              </NavLink>
+              .
+            </Description>
             <div tw="mt-12 text-center">
-              I am working on another library similar to Treact, with <span tw="font-bold">more components</span> and a much <span tw="font-bold">better developer
-              experience</span>.
+              I am working on another library similar to Treact, with{" "}
+              <span tw="font-bold">more components</span> and a much{" "}
+              <span tw="font-bold">better developer experience</span>.
             </div>
             <div tw="mt-12 text-center">
-              If you liked Treact and would like to get updates on the library I am working on among other things, do <span tw="font-bold">follow</span> me on
-              Twitter/GitHub.
+              If you liked Treact and would like to get updates on the library I
+              am working on among other things, do{" "}
+              <span tw="font-bold">follow</span> me on Twitter/GitHub.
               <div tw="mt-12 flex flex-col items-center">
                 <a
                   href="https://twitter.com/owaiswiz?ref_src=twsrc%5Etfw"

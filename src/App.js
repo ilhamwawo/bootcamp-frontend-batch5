@@ -19,6 +19,10 @@ import AboutUs from "pages/AboutUs";
 import ContactUs from "pages/ContactUs";
 import { Products } from "pages/Products";
 import { FilterProvider } from "context/filter_context";
+import { OrderProvider } from "context/order_context";
+import RestaurantLandingPage from "pages/RestaurantLandingPage";
+import Checkout from "pages/Checkout";
+import Orders from "pages/Orders";
 
 export default function App() {
   // If you want to disable the animation just use the disabled `prop` like below on your page's component
@@ -31,31 +35,35 @@ export default function App() {
       <BrowserRouter>
         <AuthProvider>
           <ProductsProvider>
-            <FilterProvider>
-              <CartProvider>
-                <Routes>
-                  <Route
-                    path="/components/:type/:subtype/:name"
-                    element={<ComponentRenderer />}
-                  />
-                  <Route
-                    path="/components/:type/:name"
-                    element={<ComponentRenderer />}
-                  />
-                  <Route path="/thank-you" element={<ThankYouPage />} />
-                  <Route path="/" element={<MainLandingPage />} />
-                  <Route path="/login" element={<LoginPage />} />
-                  <Route path="/cart" element={<Cart />} />
-                  <Route
-                    path="/detail-product/:id"
-                    element={<DetailProduct />}
-                  />
-                  <Route path="/about-us" element={<AboutUs />} />
-                  <Route path="/contact-us" element={<ContactUs />} />
-                  <Route path="/products" element={<Products />} />
-                </Routes>
-              </CartProvider>
-            </FilterProvider>
+            <OrderProvider>
+              <FilterProvider>
+                <CartProvider>
+                  <Routes>
+                    <Route
+                      path="/components/:type/:subtype/:name"
+                      element={<ComponentRenderer />}
+                    />
+                    <Route
+                      path="/components/:type/:name"
+                      element={<ComponentRenderer />}
+                    />
+                    <Route path="/thank-you" element={<ThankYouPage />} />
+                    <Route path="/" element={<RestaurantLandingPage />} />
+                    <Route path="/login" element={<LoginPage />} />
+                    <Route path="/cart" element={<Cart />} />
+                    <Route
+                      path="/detail-product/:id"
+                      element={<DetailProduct />}
+                    />
+                    <Route path="/about-us" element={<AboutUs />} />
+                    <Route path="/contact-us" element={<ContactUs />} />
+                    <Route path="/products" element={<Products />} />
+                    <Route path="/checkout" element={<Checkout />} />
+                    <Route path="/orders" element={<Orders />} />
+                  </Routes>
+                </CartProvider>
+              </FilterProvider>
+            </OrderProvider>
           </ProductsProvider>
         </AuthProvider>
       </BrowserRouter>

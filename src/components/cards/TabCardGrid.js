@@ -102,9 +102,9 @@ export default ({ heading = "Checkout the Menu" }) => {
     "Best Sellers": products
       .sort((a, b) => b.stars - a.stars) // Sort by stars in descending order
       .slice(0, 8), // Get the top 8 items
-    Main: getRandomCards(),
-    Soup: getRandomCards(),
-    Desserts: getRandomCards(),
+    Main: getRandomCards(), // Perbaharui filter berdasarkan Kaos
+    Soup: getRandomCards(), // Perbaharui filter berdasarkan Sepatu
+    Desserts: getRandomCards(), // Perbaharui filter berdasarkan Jaket
   };
 
   const openModal = (item) => {
@@ -127,6 +127,8 @@ export default ({ heading = "Checkout the Menu" }) => {
 
     if (selectedItem) {
       const quantityNumber = Number(quantity);
+
+      // Berikan validasi jika stock habis
 
       if (items[selectedItem.name]) {
         updateItemQuantity(
@@ -261,7 +263,7 @@ const getRandomCards = () => {
       price: "$5.99",
       rating: "5.0",
       reviews: "87",
-      url: "#"
+      url: "#",
     },
     {
       imageSrc:
@@ -271,7 +273,7 @@ const getRandomCards = () => {
       price: "$3.99",
       rating: "4.5",
       reviews: "34",
-      url: "#"
+      url: "#",
     },
     {
       imageSrc:
@@ -281,7 +283,7 @@ const getRandomCards = () => {
       price: "$3.99",
       rating: "3.9",
       reviews: "26",
-      url: "#"
+      url: "#",
     },
     {
       imageSrc:
@@ -291,7 +293,7 @@ const getRandomCards = () => {
       price: "$3.99",
       rating: "4.2",
       reviews: "95",
-      url: "#"
+      url: "#",
     },
     {
       imageSrc:
@@ -301,7 +303,7 @@ const getRandomCards = () => {
       price: "$2.99",
       rating: "5.0",
       reviews: "61",
-      url: "#"
+      url: "#",
     },
     {
       imageSrc:
@@ -311,7 +313,7 @@ const getRandomCards = () => {
       price: "$7.99",
       rating: "4.9",
       reviews: "89",
-      url: "#"
+      url: "#",
     },
     {
       imageSrc:
@@ -321,7 +323,7 @@ const getRandomCards = () => {
       price: "$8.99",
       rating: "4.6",
       reviews: "12",
-      url: "#"
+      url: "#",
     },
     {
       imageSrc:
@@ -331,8 +333,8 @@ const getRandomCards = () => {
       price: "$7.99",
       rating: "4.2",
       reviews: "19",
-      url: "#"
-    }
+      url: "#",
+    },
   ];
 
   // Shuffle array

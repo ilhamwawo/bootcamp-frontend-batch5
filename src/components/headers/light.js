@@ -89,21 +89,30 @@ export default ({
    * changing the defaultLinks variable below below.
    * If you manipulate links here, all the styling on the links is already done for you. If you pass links yourself though, you are responsible for styling the links or use the helper styled components that are defined here (NavLink)
    */
+
   const { totalItems } = useCart();
-  console.log("totalItems", totalItems);
+
+  //  TODO
+  //  1.Panggil local storage user simpan didalam variabel user
+  //  2.Buat button logout dan gunakan fungsi logout dari AuthProvider
+  /*  3.Tambahkan Ternary Operator untuk link login atau button logout tergantung dari user localstorage */
+
   const defaultLinks = [
     <NavLinks key={1}>
       <NavLink>
-        <Link to={"/components/landingPages/RestaurantLandingPage#"}>Home</Link>
+        <Link to={"/"}>Home</Link>
       </NavLink>
       <NavLink>
         <Link to={"/products"}>Products</Link>
       </NavLink>
       <NavLink>
-        <Link to={"/about-us"}>About Us</Link>
+        <Link to="/about-us">About Us</Link>
       </NavLink>
       <NavLink>
         <Link to={"/contact-us"}>Contact Us</Link>
+      </NavLink>
+      <NavLink>
+        <Link to={"/orders"}>Orders</Link>
       </NavLink>
       <NavLink tw="lg:ml-12!">
         <Link to="/cart">
@@ -112,15 +121,10 @@ export default ({
             <TotalItems>{totalItems}</TotalItems>
           </CartContainer>
         </Link>
-      <NavLink href="/#">Harga</NavLink>
-      <NavLink href="/#">Tentang Kami</NavLink>
-      <NavLink href="/#">Kontak</NavLink>
-      <NavLink href="/#" tw="lg:ml-12!">
-        Login
       </NavLink>
-      <NavLink href="/login">Login</NavLink>
+
       <PrimaryLink css={roundedHeaderButton && tw`rounded-full`} href="/#">
-        Sign Up
+        <Link to={"/login"}>Login</Link>
       </PrimaryLink>
     </NavLinks>,
   ];
@@ -132,7 +136,6 @@ export default ({
   const defaultLogoLink = (
     <LogoLink href="/">
       <img src={logo} alt="logo" />
-      Lebih Mudah Murah
     </LogoLink>
   );
 

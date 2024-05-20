@@ -35,27 +35,11 @@ export const AuthProvider = ({ children }) => {
 
       const user = response.data;
 
-      if (user.status === "success" && user.role === "Admin") {
-        navigation(redirectPath, { replace: true });
-        localStorage.setItem("user", JSON.stringify(user));
-        alert("Login Berhasil, Selamat Datang Admin");
-        navigation("/");
-        setUser(user);
-      }
-      if (user.status === "success" && user.role === "Author") {
-        navigation(redirectPath, { replace: true });
-        localStorage.setItem("user", JSON.stringify(user));
-        alert("Login Berhasil, Selamat Datang Author");
-        navigation("/");
-        setUser(user);
-      }
-      if (user.status === "success" && user.role === "Student") {
-        navigation(redirectPath, { replace: true });
-        localStorage.setItem("user", JSON.stringify(user));
-        alert("Login Berhasil, Selamat Datang Student");
-        navigation("/");
-        setUser(user);
-      }
+      navigation(redirectPath, { replace: true });
+      localStorage.setItem("user", JSON.stringify(user));
+      alert("Login Berhasil, Selamat Datang Admin");
+      navigation("/");
+      setUser(user);
     } catch (error) {
       console.error(error);
       alert(

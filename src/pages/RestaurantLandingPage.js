@@ -21,6 +21,11 @@ export default () => {
   const HighlightedTextInverse = tw.span`bg-gray-100 text-primary-500 px-4 transform -skew-x-12 inline-block`;
   const Description = tw.span`inline-block mt-8`;
   const imageCss = tw`rounded-4xl`;
+
+  // TODO
+  // 1. Panggil component yang harusnya ada di halaman ini
+  // 2. Modifikasi styling dan value property yang dimiliki component
+
   return (
     <AnimationRevealPage>
       <Hero
@@ -37,7 +42,7 @@ export default () => {
         primaryButtonText="Order Now"
         watchVideoButtonText="Meet The Chefs"
       />
-      
+
       <DownloadApp
         text={
           <>
@@ -46,7 +51,7 @@ export default () => {
           </>
         }
       />
-      <Footer background={"bg-gray-200"}/>
+      <Footer background={"bg-gray-200"} />
     </AnimationRevealPage>
   );
 };

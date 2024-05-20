@@ -7,7 +7,6 @@ import { useParams } from "react-router-dom";
 import { useCart } from "react-use-cart";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import axios from "axios";
 import { formatPrice } from "helpers/helpers";
 import { FaStar, FaStarHalf, FaCheck } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
@@ -53,65 +52,12 @@ const DetailProduct = () => {
 
   const handleAddToCart = () => {
     if (selectedItem && selectedColor) {
-      const quantityNumber = Number(quantity);
-      const priceNumber = parseFloat(selectedItem.price);
-
-      // Generate a unique cartItemId based on itemId and color
-      const cartItemId = `${selectedItem.id}-${selectedColor}`;
-
-      if (items[cartItemId]) {
-        // If the item with the selected color is already in the cart, update its quantity
-        updateItemQuantity(
-          cartItemId,
-          Number(items[cartItemId].quantity) + quantityNumber
-        );
-      } else {
-        // If the item with the selected color is not in the cart, add it as a new entry
-        addItem(
-          {
-            ...selectedItem,
-            price: priceNumber,
-            color: selectedColor,
-          },
-          quantityNumber,
-          cartItemId
-        );
-      }
-
-      setQuantity(1);
-
-      // Tampilkan pesan bahwa item berhasil ditambahkan ke keranjang
-      toast.success(
-        `Added ${quantityNumber} ${selectedItem.name}(s) to the cart`,
-        {
-          position: "top-center",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        }
-      );
-
-      // Close the modal after adding to the cart
-      setShowModal(false);
+      // Lengkapi code berikut
     }
   };
 
   useEffect(() => {
-    const getProduct = async () => {
-      try {
-        const response = await axios.get(
-          `https://65cc9d71dd519126b83f161f.mockapi.io/api/v1/products/${id}`
-        );
-        setProduct(response.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-
-    getProduct();
+    // Your code here
   }, [id]);
 
   const handleChangePrice = () => {
@@ -126,8 +72,6 @@ const DetailProduct = () => {
     const updatedPrice = handleChangePrice();
     setProduct((prevProduct) => ({ ...prevProduct, updatedPrice }));
   }, [quantity, product.price]);
-
-  console.log("product", product);
 
   return (
     <AnimationRevealPage>
@@ -157,7 +101,7 @@ const DetailProduct = () => {
                     <img
                       key={index}
                       src={image.url}
-                      alt={`${product.name} - Image ${index + 1}`}
+                      alt={`${product.name} - ${index + 1}`}
                       className={`h-20 w-20 rounded cursor-pointer ${
                         index === mainImageIndex
                           ? "border-2 border-red-500"
@@ -171,7 +115,7 @@ const DetailProduct = () => {
             </div>
 
             <ProductInfo>
-              <Title>{product.name}</Title>
+              <Title>Nama Product </Title>
               <RatingReviews>
                 <div className="flex items-center justify-center md:justify-normal">
                   {product.stars}
@@ -196,14 +140,14 @@ const DetailProduct = () => {
                       );
                     })}
                   </span>
-                  | Reviews: {product.reviews}
+                  | Reviews:
                 </div>
               </RatingReviews>
-              <Description>{product.description}</Description>
+              <Description>Deskripsi</Description>
               <div>
-                <p className="mb-2">Available : In Stock</p>
-                <p className="mb-2">SKU : {product.stock}</p>
-                <p className="mb-2">Company : {product.company}</p>
+                <p className="mb-2">Available : </p>
+                <p className="mb-2">SKU : </p>
+                <p className="mb-2">Company :</p>
                 <hr className="my-4 h-1 border bg-gray-500" />
 
                 <div className="flex">

@@ -100,7 +100,9 @@ const filter_reducer = (state, action) => {
 
     // filter by shipping
     if (shipping) {
-      tempProducts = tempProducts.filter((product) => product.shipping <= true);
+      tempProducts = tempProducts.filter(
+        (product) => product.shipping === true
+      );
     }
     return { ...state, filtered_products: tempProducts };
   }
