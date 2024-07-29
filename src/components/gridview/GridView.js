@@ -27,8 +27,8 @@ const GridView = ({ products }) => {
           return (
             <Product
               key={item.id}
-              image={item.image}
-              name={item.name}
+              image={`http://localhost:8000/uploads/${item.images[0]}`}
+              name={item.title}
               id={item.id}
               price={item.price}
             ></Product>

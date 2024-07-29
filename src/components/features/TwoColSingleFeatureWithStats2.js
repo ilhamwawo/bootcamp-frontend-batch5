@@ -43,10 +43,10 @@ export default ({
   subheading = "Our Track Record",
   heading = (
     <>
-      We have been doing this <wbr /> since <span tw="text-primary-500">1999.</span>
+      We have been doing this <wbr /> since <span tw="text-primary-500">2024.</span>
     </>
   ),
-  description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+  description = "Kita banyak mengerjakan beberapa project-project pemerintah dan pihak swasta , Clients dari dalam negri maupun luar negri sehingga memiliki permintaan-permintaan sesuai permintaan Clients",
   primaryButtonText = "Learn More",
   primaryButtonUrl = "https://timerse.com",
   imageSrc = StatsIllustrationSrc,

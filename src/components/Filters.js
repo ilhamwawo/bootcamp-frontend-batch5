@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useFilterContext } from "../context/filter_context";
 import { getUniqueValues, formatPrice } from "../helpers/helpers";
 import { FaCheck } from "react-icons/fa";
+import { useProductsContext } from "context/product_context";
 
 const Filters = () => {
   const {
@@ -21,7 +22,11 @@ const Filters = () => {
     clearFilters,
   } = useFilterContext();
 
-  const categories = getUniqueValues(all_products, "category");
+  const {kategori , getAllCategory} = useProductsContext()
+  console.log(kategori)
+ 
+  const categories = ["All", ...kategori.map((item) => item.name )]
+  // const categories = getUniqueValues(all_products, "category tes");
   const companies = getUniqueValues(all_products, "company");
   const colors = getUniqueValues(all_products, "colors");
 

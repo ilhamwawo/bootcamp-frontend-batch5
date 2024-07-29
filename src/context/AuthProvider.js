@@ -29,9 +29,15 @@ export const AuthProvider = ({ children }) => {
 
     try {
       const response = await axios.post(
-        `http://localhost:8000/auth/login`,
-        dataUser
-      );
+        `http://localhost:8000/api/auth/customer/sign-in`,
+        JSON.stringify(form),
+        {
+          headers: {
+            "Content-Type": "application/json",
+          }
+        }
+      )
+    
 
       const user = response.data;
 

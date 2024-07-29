@@ -13,6 +13,8 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useProductsContext } from "context/product_context";
+import {data} from "helpers/Utils.js"
+
 
 const HeaderRow = tw.div`flex justify-between items-center flex-col xl:flex-row`;
 const Header = tw(SectionHeading)``;
@@ -34,7 +36,7 @@ const TabControl = styled.div`
   &:hover {
     ${tw`bg-gray-300 text-gray-700`}
   }
-  ${(props) => props.active && tw`bg-primary-500! text-gray-100!`}
+  ${(props) => props.active && tw`bg-secondary-500! text-gray-100!`}
   }
 `;
 
@@ -80,31 +82,32 @@ const DecoratorBlob2 = styled(SvgDecoratorBlob2)`
   ${tw`pointer-events-none -z-20 absolute left-0 bottom-0 h-80 w-80 opacity-15 transform -translate-x-2/3 text-primary-500`}
 `;
 
-export default ({ heading = "Checkout the Menu" }) => {
+export default ({ heading = "Checkouts the Products" }) => {
+  const { products , getProductById } = useProductsContext();
   const [showModal, setShowModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [tabsKeys, setTabsKeys] = useState([
     "Best Sellers",
-    "Main",
-    "Soup",
-    "Desserts",
+    "sepatu",
+    "baju ",
+    "topi",
+    "kemeja",
   ]);
   const [activeTab, setActiveTab] = useState("Best Sellers");
   const { addItem, updateItemQuantity, items } = useCart();
-  const { products } = useProductsContext();
-  const getRandomCards = () => {
-    const cards = products;
-    return cards.sort(() => Math.random() - 0.5);
-  };
-
+ 
+  // const getRandomCards = () => {
+    // const products = data;
+    // return cards.sort(() => Math.random() - 0.5);
+  // };
+// 
   const tabs = {
-    "Best Sellers": products
-      .sort((a, b) => b.stars - a.stars) // Sort by stars in descending order
-      .slice(0, 8), // Get the top 8 items
-    Main: getRandomCards(), // Perbaharui filter berdasarkan Kaos
-    Soup: getRandomCards(), // Perbaharui filter berdasarkan Sepatu
-    Desserts: getRandomCards(), // Perbaharui filter berdasarkan Jaket
+    "Best Sellers": products?.sort((a, b) => b.rating - a.rating).slice(0,8), // Sort by stars in descending order
+    sepatu: products?.filter((product) => product.category.name === 'Sepatu'), // Perbaharui filter berdasarkan kemeja
+    baju : products?.filter((product) => product.category.name === 'Baju'), // Perbaharui filter berdasarkan baju
+    topi: products?.filter((product) => product.category.name === 'Topi'), // Perbaharui filter berdasarkan celana
+    kemeja: products?.filter((product) => product.category.name === 'Kemeja'), // Perbaharui filter berdasarkan jakety
   };
 
   const openModal = (item) => {
@@ -130,10 +133,10 @@ export default ({ heading = "Checkout the Menu" }) => {
 
       // Berikan validasi jika stock habis
 
-      if (items[selectedItem.name]) {
+      if (items[selectedItem.title]) {
         updateItemQuantity(
           selectedItem.id,
-          Number(items[selectedItem.name].quantity) + quantityNumber
+          Number(items[selectedItem.title].quantity) + quantityNumber
         );
       } else {
         addItem(selectedItem, quantityNumber);
@@ -143,7 +146,7 @@ export default ({ heading = "Checkout the Menu" }) => {
       closeModal();
 
       toast.success(
-        `Added ${quantityNumber} ${selectedItem.name}(s) to the cart`,
+        `Added ${quantityNumber} ${selectedItem.title}(s) to the cart`,
         {
           position: "top-center",
           autoClose: 3000,
@@ -163,7 +166,7 @@ export default ({ heading = "Checkout the Menu" }) => {
         <HeaderRow>
           <Header>{heading}</Header>
           <TabsControl>
-            {Object.keys(tabs).map((tabName, index) => (
+            {Object.keys(tabs)?.map((tabName, index) => (
               <TabControl
                 key={index}
                 active={activeTab === tabName}
@@ -175,7 +178,7 @@ export default ({ heading = "Checkout the Menu" }) => {
           </TabsControl>
         </HeaderRow>
 
-        {tabsKeys.map((tabKey, index) => (
+        {tabsKeys?.map((tabKey, index) => (
           <TabContent
             key={index}
             variants={{
@@ -194,7 +197,7 @@ export default ({ heading = "Checkout the Menu" }) => {
             initial={activeTab === tabKey ? "current" : "hidden"}
             animate={activeTab === tabKey ? "current" : "hidden"}
           >
-            {tabs[tabKey].map((card, index) => (
+            {tabs[tabKey]?.map((card, index) => (
               <CardContainer key={index}>
                 <Card
                   className="group"
@@ -204,7 +207,7 @@ export default ({ heading = "Checkout the Menu" }) => {
                 >
                   <Link to={`/detail-product/${card.id}`}>
                     <CardImageContainer
-                      image={card.image}
+                      image={`http://localhost:8000/uploads/${card.images[0]}`}
                       className="flex items-center justify-center"
                     />
                   </Link>
@@ -252,91 +255,3 @@ export default ({ heading = "Checkout the Menu" }) => {
   );
 };
 
-/* This function is only there for demo purposes. It populates placeholder cards */
-const getRandomCards = () => {
-  const cards = [
-    {
-      imageSrc:
-        "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80",
-      title: "Chicken Chilled",
-      content: "Chicken Main Course",
-      price: "$5.99",
-      rating: "5.0",
-      reviews: "87",
-      url: "#",
-    },
-    {
-      imageSrc:
-        "https://images.unsplash.com/photo-1582254465498-6bc70419b607?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80",
-      title: "Samsa Beef",
-      content: "Fried Mexican Beef",
-      price: "$3.99",
-      rating: "4.5",
-      reviews: "34",
-      url: "#",
-    },
-    {
-      imageSrc:
-        "https://images.unsplash.com/photo-1565310022184-f23a884f29da?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80",
-      title: "Carnet Nachos",
-      content: "Chilli Crispy Nachos",
-      price: "$3.99",
-      rating: "3.9",
-      reviews: "26",
-      url: "#",
-    },
-    {
-      imageSrc:
-        "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80",
-      title: "Guacamole Mex",
-      content: "Mexican Chilli",
-      price: "$3.99",
-      rating: "4.2",
-      reviews: "95",
-      url: "#",
-    },
-    {
-      imageSrc:
-        "https://images.unsplash.com/photo-1550461716-dbf266b2a8a7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80",
-      title: "Chillie Cake",
-      content: "Deepfried Chicken",
-      price: "$2.99",
-      rating: "5.0",
-      reviews: "61",
-      url: "#",
-    },
-    {
-      imageSrc:
-        "https://images.unsplash.com/photo-1476224203421-9ac39bcb3327??ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80",
-      title: "Nelli",
-      content: "Hamburger & Fries",
-      price: "$7.99",
-      rating: "4.9",
-      reviews: "89",
-      url: "#",
-    },
-    {
-      imageSrc:
-        "https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80",
-      title: "Jalapeno Poppers",
-      content: "Crispy Soyabeans",
-      price: "$8.99",
-      rating: "4.6",
-      reviews: "12",
-      url: "#",
-    },
-    {
-      imageSrc:
-        "https://images.unsplash.com/photo-1473093226795-af9932fe5856?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80",
-      title: "Cajun Chicken",
-      content: "Roasted Chicken & Egg",
-      price: "$7.99",
-      rating: "4.2",
-      reviews: "19",
-      url: "#",
-    },
-  ];
-
-  // Shuffle array
-  return cards.sort(() => Math.random() - 0.5);
-};

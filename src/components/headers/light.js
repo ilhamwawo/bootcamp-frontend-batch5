@@ -6,11 +6,14 @@ import { css } from "styled-components/macro"; //eslint-disable-line
 import { IoCart } from "react-icons/io5";
 import useAnimatedNavToggler from "../../helpers/useAnimatedNavToggler.js";
 
-import logo from "../../images/cek-toko-sebelah.png";
+import logo from "../../images/logo-.png";
 import { ReactComponent as MenuIcon } from "feather-icons/dist/icons/menu.svg";
 import { ReactComponent as CloseIcon } from "feather-icons/dist/icons/x.svg";
 import { useCart } from "react-use-cart";
 import { Link } from "react-router-dom";
+import { useAuth } from "context/AuthProvider.js";
+
+
 
 const Header = tw.header`
   flex justify-between items-center
@@ -30,8 +33,8 @@ export const NavLink = tw.a`
 
 export const PrimaryLink = tw(NavLink)`
   lg:mx-0
-  px-8 py-3 rounded bg-primary-500 text-gray-100
-  hocus:bg-primary-700 hocus:text-gray-200 focus:shadow-outline
+  px-8 py-3 rounded bg-secondary-500 text-gray-100
+  hocus:bg-secondary-700 hocus:text-gray-200 focus:shadow-outline
   border-b-0
 `;
 
@@ -91,6 +94,9 @@ export default ({
    */
 
   const { totalItems } = useCart();
+  const { user, logout } = useAuth()
+  const localUser = JSON.parse(localStorage.getItem('user'))
+  console.log(user)
 
   //  TODO
   //  1.Panggil local storage user simpan didalam variabel user
@@ -123,9 +129,17 @@ export default ({
         </Link>
       </NavLink>
 
-      <PrimaryLink css={roundedHeaderButton && tw`rounded-full`} href="/#">
-        <Link to={"/login"}>Login</Link>
-      </PrimaryLink>
+      {user || localUser ? <div className="flex gap-x-4">
+          <PrimaryLink css={roundedHeaderButton && tw`rounded-full`}>  
+            <button onClick={logout}>Logout</button> 
+          </PrimaryLink>
+          <p className="my-auto ">{user?.name || localUser?.name}</p>
+              </div> : <>
+          <PrimaryLink css={roundedHeaderButton && tw`rounded-full`}>  
+            <Link to={"/login"}>Login</Link>
+          </PrimaryLink></>} 
+   
+      
     </NavLinks>,
   ];
 

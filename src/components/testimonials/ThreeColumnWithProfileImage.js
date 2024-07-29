@@ -28,10 +28,24 @@ export default ({
   testimonials = [
     {
       imageSrc:
+        "https://plus.unsplash.com/premium_photo-1673866484792-c5a36a6c025e?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      quote:
+        "Sangat puas berbelanja di toko ini , pelayanan cepat, ongkos kirim gratis.",
+      customerName: "M.Ilham"
+    },
+    {
+      imageSrc:
+        "https://media.istockphoto.com/id/2135911010/photo/front-view-of-male-hiker-on-muriwai-beach.webp?b=1&s=170667a&w=0&k=20&c=jCEiVyJCP3s1NyoBOaZsNfZ7wWlEcbHcwE1LdLp9Bz4=",
+      quote:
+        "Barang sangat berkualitas , bahannya top quality , sangat affordable",
+      customerName: "Mas Daus"
+    },
+    {
+      imageSrc:
         "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3.25&w=512&h=512&q=80",
       quote:
-        "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia.",
-      customerName: "Charlotte Hale"
+        "Banyak pilihan warna sehingga memudahkan dalam pemilihan sesuai selera kita",
+      customerName: "Selvi"
     }
   ]
 }) => {

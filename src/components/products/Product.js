@@ -3,10 +3,15 @@ import styled from "styled-components";
 import { formatPrice } from "../../helpers/helpers";
 import { FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useProductsContext } from "context/product_context";
 
 const Product = ({ image, name, price, id }) => {
+  const {loading} = useProductsContext()
   return (
-    <Wrapper>
+    loading ? (
+      <div>Loadinng...</div>
+    )  : (
+      <Wrapper>
       <div className="container">
         <img src={image} alt={name} className="h-80" />
         <Link to={`/detail-product/${id}`} className="link">
@@ -18,6 +23,7 @@ const Product = ({ image, name, price, id }) => {
         <p>{formatPrice(price)}</p>
       </footer>
     </Wrapper>
+    )
   );
 };
 

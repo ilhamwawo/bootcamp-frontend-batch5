@@ -7,16 +7,18 @@ import { useParams } from "react-router-dom";
 import { useCart } from "react-use-cart";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
 import { formatPrice } from "helpers/helpers";
 import { FaStar, FaStarHalf, FaCheck } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { useProductsContext } from "context/product_context";
 
 const DetailProduct = () => {
   const { id } = useParams();
   const { addItem, items, updateItemQuantity } = useCart();
   const [quantity, setQuantity] = useState(1);
   const [selectedItem, setSelectedItem] = useState(null);
-  const [product, setProduct] = useState({});
+  const { product, setProduct, getProductById , loading} = useProductsContext();
   const [showModal, setShowModal] = useState(false);
   const [mainImageIndex, setMainImageIndex] = useState(0);
   const [selectedColor, setSelectedColor] = useState(null);
@@ -52,16 +54,71 @@ const DetailProduct = () => {
 
   const handleAddToCart = () => {
     if (selectedItem && selectedColor) {
-      // Lengkapi code berikut
+      // Check if stock is available
+      // Buat validasi jika stock sudah habis
+      // Continue with adding the item to cart if stock is available
+      const quantityNumber = Number(quantity);
+      const priceNumber = parseFloat(selectedItem.price);
+      const cartItemId = `${selectedItem.id}-${selectedColor}`;
+
+      if (items[cartItemId]) {
+        // If the item with the selected color is already in the cart, update its quantity
+        updateItemQuantity(
+          cartItemId,
+          Number(items[cartItemId].quantity) + quantityNumber
+        );
+      } else {
+        // If the item with the selected color is not in the cart, add it as a new entry
+        addItem(
+          {
+            ...selectedItem,
+            price: priceNumber,
+            color: selectedColor,
+          },
+          quantityNumber,
+          cartItemId
+        );
+      }
+
+      setQuantity(1);
+      setSelectedColor(null);
+      // Tampilkan pesan bahwa item berhasil ditambahkan ke keranjang
+      toast.success(
+        `Added ${quantityNumber} ${selectedItem.title}(s) to the cart`,
+        {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        }
+      );
+
+      // Close the modal after adding to the cart
+      setShowModal(false);
+    } else {
+      // Jika user tidak memilih warna, tampilkan pesan peringatan
+      toast.error("Pilih Warna Terlebih Dahulu!", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      setShowModal(false);
     }
   };
 
   useEffect(() => {
-    // Your code here
+    getProductById(id);
   }, [id]);
 
   const handleChangePrice = () => {
-    return product.price * quantity;
+    return product?.price * quantity;
   };
 
   const handleQuantityChange = (newQuantity) => {
@@ -71,14 +128,18 @@ const DetailProduct = () => {
   useEffect(() => {
     const updatedPrice = handleChangePrice();
     setProduct((prevProduct) => ({ ...prevProduct, updatedPrice }));
-  }, [quantity, product.price]);
+  }, [quantity, product?.price]);
+
+  console.log("product", product);
 
   return (
     <AnimationRevealPage>
       <Header className={"mb-8"} />
 
       <Container>
-        <Content>
+        {loading ? <div>
+          <div className="text-center">Loading...</div> 
+        </div> : <Content>
           <div className="md:flex md:space-x-10 md:mx-auto">
             <div>
               <button
@@ -87,21 +148,21 @@ const DetailProduct = () => {
               >
                 Back to products
               </button>
-              {Array.isArray(product.images) && product.images.length > 0 && (
+              {Array.isArray(product?.images) && product?.images.length > 0 && (
                 <>
                   <ProductImage
-                    src={product.images[mainImageIndex].url}
-                    alt={product.name}
+                    src={`http://localhost:8000/uploads/${product?.images[mainImageIndex]}`}
+                    alt={product?.title}
                   />
                 </>
               )}
-              {Array.isArray(product.images) && product.images.length > 1 && (
+              {Array.isArray(product?.images) && product?.images.length > 1 && (
                 <div className="grid grid-cols-5 sm:gap-2 mt-4 ">
                   {product.images.map((image, index) => (
                     <img
                       key={index}
-                      src={image.url}
-                      alt={`${product.name} - ${index + 1}`}
+                      src={`http://localhost:8000/uploads/${image}`}
+                      alt={`${product?.title} - ${index + 1}`}
                       className={`h-20 w-20 rounded cursor-pointer ${
                         index === mainImageIndex
                           ? "border-2 border-red-500"
@@ -115,46 +176,20 @@ const DetailProduct = () => {
             </div>
 
             <ProductInfo>
-              <Title>Nama Product </Title>
-              <RatingReviews>
-                <div className="flex items-center justify-center md:justify-normal">
-                  {product.stars}
-                  <span className=" flex mx-2">
-                    {[...Array(5)].map((_, index) => {
-                      const starValue = index + 1;
-                      const isHalfStar =
-                        starValue - 0.5 === Math.floor(product.stars);
+              <Title>{product?.title}</Title>
 
-                      return (
-                        <span key={index} className="my-auto ">
-                          {starValue <= product.stars ? (
-                            isHalfStar ? (
-                              <FaStarHalf style={{ color: "#fbbf24" }} />
-                            ) : (
-                              <FaStar style={{ color: "#fbbf24" }} />
-                            )
-                          ) : (
-                            <FaStar style={{ color: "#d1d5db" }} />
-                          )}
-                        </span>
-                      );
-                    })}
-                  </span>
-                  | Reviews:
-                </div>
-              </RatingReviews>
-              <Description>Deskripsi</Description>
+              <Description>{product?.description}</Description>
               <div>
-                <p className="mb-2">Available : </p>
-                <p className="mb-2">SKU : </p>
-                <p className="mb-2">Company :</p>
+                <p className="mb-2">Available : In Stock</p>
+                <p className="mb-2">Stock : {product?.stock}</p>
+                <p className="mb-2">Company : {product?.company}</p>
                 <hr className="my-4 h-1 border bg-gray-500" />
 
                 <div className="flex">
                   <p className="my-auto mr-4">Colors : </p>
-                  {Array.isArray(product.colors) && (
+                  {Array.isArray(product?.colors) && (
                     <div className="flex space-x-2">
-                      {product.colors.map((color, index) => (
+                      {product?.colors.map((color, index) => (
                         <div
                           key={index}
                           className={`relative w-8 h-8 rounded-full cursor-pointer border-2 ${
@@ -194,7 +229,8 @@ const DetailProduct = () => {
               <AddToCartButton onClick={openModal}>Add to Cart</AddToCartButton>
             </ProductInfo>
           </div>
-        </Content>
+        </Content>}
+        
       </Container>
       {showModal && (
         <>
@@ -203,7 +239,7 @@ const DetailProduct = () => {
               <h2 tw="text-2xl font-semibold mb-4">
                 Are you sure want add this item to cart?
               </h2>
-              <p>Name : {selectedItem.name}</p>
+              <p>Name : {selectedItem.title}</p>
               <p>Quantity : {quantity}</p>
               <div className="flex items-center justify-center">
                 <p className="my-auto mr-3">Color : </p>
